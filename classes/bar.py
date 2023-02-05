@@ -26,8 +26,8 @@ class Bar:
         
         drink_purchased = self.find_drink(drink)
         if self.check_wallet(guest, drink_purchased) == True:
-            guest.remove_cash(drink_purchased.price)
-            guest.add_to_tab(drink_purchased.price)
+            guest.remove_cash(drink_purchased.price) # type: ignore
+            guest.add_to_tab(drink_purchased.price) # type: ignore
             self.remove_drink(drink_purchased)
             guest.add_drink_to_guest(drink_purchased)
             

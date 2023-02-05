@@ -2,6 +2,8 @@ import unittest
 
 from classes.bar import Bar
 from classes.drink import Drink
+from classes.guest import Guest
+from classes.song import Song
 
 class TestBar(unittest.TestCase):
 
@@ -45,16 +47,36 @@ class TestBar(unittest.TestCase):
         self.assertEqual('drink not found', result)
 
 
+    def test_check_guest_has_enough_cash__True (self):
+        self.song_01 = Song('Billie Jean', 'Michael Jackson', 4.53)
+        self.guest =Guest('David',25,50,self.song_01)
+        self.bar.add_drink(self.drink_01)
+        drink = self.bar.find_drink('beer')
+        self.bar.check_wallet(self.guest,drink)
+        self.assertEqual(True,self.bar.check_wallet(self.guest,drink))
 
 
+    def test_check_guest_has_enough_cash__False (self):
+        self.song_01 = Song('Billie Jean', 'Michael Jackson', 4.53)
+        self.guest =Guest('David',25,5,self.song_01)
+        self.bar.add_drink(self.drink_01)
+        self.bar.check_wallet(self.guest,self.drink_01)
+        self.assertEqual(False,self.bar.check_wallet(self.guest, self.drink_01))
+        
 
+    # adding cash to guest tab and will pay tab via a method in karaoke_bar class
 
-    # def test_sell_drink_to_guest(self):
-    #     self.bar.add_drink(self.drink_01)
-    #     self.bar.add_drink(self.drink_02)
-    #     self.bar.add_drink(self.drink_03)
-    #     self.sell_drink('beer')
-    #     self.assertEqual
+    def test_sell_drink_to_guest(self):
+        self.song_01 = Song('Billie Jean', 'Michael Jackson', 4.53)
+        self.guest =Guest('David',25,50,self.song_01)
+        self.bar.add_drink(self.drink_01)
+        self.bar.add_drink(self.drink_02)
+        self.bar.sell_drink(self.guest,'beer')
+        self.assertEqual(40,self.guest.wallet)
+        self.assertEqual(10 ,self.guest.tab)
+        self.assertEqual(self.drink_02,self.bar.drinks[0])
+        self.assertEqual(self.drink_01, self.guest.guest_drink[0])
+
 
 
 

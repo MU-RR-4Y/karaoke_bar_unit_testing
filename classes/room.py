@@ -51,13 +51,19 @@ class Room:
         self.time_taken += self.playlist[0].time_of_song
 
 
-    def song_playing(self,current_song):
+
+# still working on this - not sure best way to test tracking time taken
+
+    def next_song_playing(self,current_song):
         while self.current_song_time > 0:
             self.current_song_time -= 1
         
         if self.current_song_time == 0:
             self.remove_song_from_playlist(self.playlist)
             self.play_song(self.playlist)
+
+
+        
 
 
 
